@@ -7,16 +7,16 @@ class Area
 
 
   def initialize(data_hash)
-    @zipcode = data_hash[:zipcode] || 0
-    @estimated_population = data_hash[:estimated_population] || 0
+    @zipcode = data_hash[:zipcode].to_i || 0
+    @estimated_population = data_hash[:estimated_population].to_i || 0
     @city = data_hash[:city] || "n/a"
     @state = data_hash[:state] || "n/a"
   end
 
 
   def to_s
-    "#{@city || 'no-data'}, #{@state || 'no-data'} #{@zipcode || 'no-data'} "
-      "has #{@estimated_population || 'no-data'} people."
+    zip = sprintf("%05d", @zipcode.to_s)
+    "#{@city}, #{@state} #{zip} has #{@estimated_population} people."
   end
 
 

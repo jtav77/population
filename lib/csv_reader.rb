@@ -29,9 +29,9 @@ class CSVReader
   def headers=(header_str)
     @headers = header_str.split(',')
     @headers.map! do |str|
-      str.gsub!('"','')       # no quotes
+      str.gsub!('"', '')      # no quotes
       str.strip!              # no newlines
-      str.underscore.to_sym   # convert to camel case symbols
+      str.underscore.to_sym   # convert to snake case symbols
     end
   end
 
@@ -41,7 +41,7 @@ class CSVReader
     value = ""
 
     @headers.each_with_index do |header, i|
-        value = values[i].strip.gsub('"','')      # no newlines or quotes
+        value = values[i].strip.gsub('"', '')      # no newlines or quotes
         headers_hash[header] = value unless value.empty?
     end
     headers_hash

@@ -19,7 +19,6 @@ class Setup
 
     self
 
-
   end
 
 

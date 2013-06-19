@@ -20,7 +20,7 @@ class Analytics
     @options << { menu_id: 1, menu_title: 'Areas count', method: :how_many }
     @options << { menu_id: 2, menu_title: 'Smallest Population (non 0)',
       method: :smallest_pop }
-    @options << { menu_id: 3, menu_title: 'Larest Population',
+    @options << { menu_id: 3, menu_title: 'Largest Population',
       method: :largest_pop }
     @options << { menu_id: 4, menu_title: 'How many zips in California?',
       method: :california_zips }
@@ -52,29 +52,37 @@ class Analytics
 # finds the zip code with the smallest population
   def smallest_pop
       sorted = @areas.sort do |a,b|
-        b.estimated_population <=> a.estimated_population
+        a.estimated_population <=> b.estimated_population
       end
 
       smallest = sorted.drop_while { |i| i.estimated_population == 0}.first
-      puts "#{smallest.city}, #{smallest.state} has the smallest population: "
-        "#{smallest.estimated_population}."
+      if smallest != nil
+        puts "#{smallest.city}, #{smallest.state} has the smallest population: "\
+          "#{smallest.estimated_population}."
+      else
+        puts "Insufficient data available."
+      end
   end
 
 
 # finds the zip code with the largest population
   def largest_pop
       sorted = @areas.sort do |a,b|
-        a.estimated_population <=> b.estimated_population
+        b.estimated_population <=> a.estimated_population
       end
 
       largest = sorted.first
-      puts "#{largest.city}, #{largest.state} has the largest population: "
-        "#{largest.estimated_population}."
+      if largest != nil
+        puts "#{largest.city}, #{largest.state} has the largest population: "\
+          "#{largest.estimated_population}."
+      else
+        puts "Insufficient data available."
+      end
 
   end
 
 
-# finds the number of zip codes in California
+# finds the number of zip codes in California, may be inaccurate if Area is not fully initialized
   def california_zips
     num_cal_zips = @areas.count {|item| item.state == "CA"}
     puts "There are #{num_cal_zips} zip code match(es) in California."
