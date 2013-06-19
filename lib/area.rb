@@ -3,7 +3,7 @@
 class Area
 
 
-  attr_accessor :zipcode, :estimates_population, :city, :state
+  attr_accessor :zipcode, :estimated_population, :city, :state
 
 
   def initialize(data_hash)
@@ -15,8 +15,8 @@ class Area
 
 
   def to_s
-    "#{@city}, #{@state} #{@zipcode} has #{@estimated_population} people." unless
-    @zipcode == 0 || @estimated_population == 0 || @city == "n/a" || @state == "n/a"
+    "#{@city || 'no-data'}, #{@state || 'no-data'} #{@zipcode || 'no-data'} "
+      "has #{@estimated_population || 'no-data'} people."
   end
 
 
